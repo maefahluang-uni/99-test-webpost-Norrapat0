@@ -18,12 +18,12 @@ public class UserController {
 
     // TODO: end point for validate user by username
     @GetMapping("/users/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+    public ResponseEntity<List<User>> getUserByUsername(@PathVariable String username) {
         List<User> listuser = userRepository.findUserByUsername(username);
         if (listuser.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(listuser);
     }
 
     @GetMapping("/users")

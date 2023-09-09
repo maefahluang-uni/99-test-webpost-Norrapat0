@@ -50,7 +50,7 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(listpost);
     }
 
     // TODO: adding new post
