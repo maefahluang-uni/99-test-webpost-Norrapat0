@@ -8,4 +8,6 @@ import lab.webpost.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     //TODO: add necessary derived methods
+    public List<User> findAll();
+    public List<User> findUserByUsername(String username);
 }

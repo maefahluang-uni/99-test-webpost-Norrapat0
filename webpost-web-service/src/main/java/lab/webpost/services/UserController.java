@@ -3,6 +3,7 @@ package lab.webpost.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +16,21 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-
-    //TODO: end point for validate user by username 
-    public ResponseEntity<User> getUserByUsername(String username) {
-       return null;
+    // TODO: end point for validate user by username
+    @GetMapping("/users/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        List<User> listuser = userRepository.findUserByUsername(username);
+        if (listuser.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getPosts() {
+        List<User> user = userRepository.findAll();
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+
 }
